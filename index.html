@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Werbeplatz verfügbar</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0b0b0c url('pulver-hintergrund.png') no-repeat center center;
+      background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      text-align: center;
+      padding: 60px 20px;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 30px;
+    }
+    .counter-box {
+      border: 1px solid #f05540;
+      padding: 20px;
+      margin: 30px auto;
+      max-width: 400px;
+      border-radius: 8px;
+      background-color: rgba(0,0,0,0.4);
+    }
+    .counter-box strong {
+      font-size: 2.5em;
+      display: block;
+      margin: 10px 0;
+      color: #f05540;
+    }
+    .price {
+      font-size: 1.2em;
+      margin: 40px 0 20px;
+    }
+    .button {
+      background-color: #f05540;
+      color: white;
+      padding: 15px 30px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-block;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .button:hover {
+      background-color: #d63c2e;
+    }
+  </style>
+</head>
+<body>
+  <h1>Deine Werbung hier?<br>Warum eigentlich nicht!</h1>
+
+  <div class="counter-box">
+    <p>Heute hätten schon</p>
+    <strong id="counter">0</strong>
+    <p>Menschen deine Anzeige gesehen.</p>
+  </div>
+
+  <p class="price"><strong>Ab 19 € pro Woche</strong><br>– fair, sichtbar, persönlich.</p>
+
+  <a href="mailto:werbung@gondelsheim.com" class="button">Jetzt anfragen</a>
+
+  <script>
+    fetch('https://api.countapi.xyz/hit/gondelsheim.com/visits')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('counter').textContent = data.value;
+      })
+      .catch(error => {
+        document.getElementById('counter').textContent = '–';
+        console.error('Fehler beim Zähler:', error);
+      });
+  </script>
+</body>
+</html>
